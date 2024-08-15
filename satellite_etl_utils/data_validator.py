@@ -31,49 +31,53 @@ class DataValidationUtils:
         return data
 
     @staticmethod
-    def get_valid_value(value, name):
-        if (name == "pm2_5" or name == "pm10") and (value < 1 or value > 1000):
+    def get_valid_value(value, name,data:pd.DataFrame):
+        upper_limit = data[name].max()+data[name].median()/2
+        lower_limit = data[name].min()-data[name].median()/2
+        if value > upper_limit and value < lower_limit:
             return None
-        elif name == "latitude" and (value < -90 or value > 90):
-            return None
-        elif name == "longitude" and (value < -180 or value > 180):
-            return None
-        elif name == "battery" and (value < 2.7 or value > 5):
-            return None
-        elif name == "no2" and (value < 0 or value > 2049):
-            return None
-        elif (name == "altitude" or name == "hdop") and value <= 0:
-            return None
-        elif name == "satellites" and (value <= 0 or value > 50):
-            return None
-        elif (name == "temperature") and (value <= 0 or value > 45):
-            return None
-        elif (name == "humidity") and (value <= 0 or value > 99):
-            return None
-        elif (name == "sulphurdioxide_so2_column_number_density") and (value > 0.01):
-            return None
-        elif (name == "sulphurdioxide_so2_column_number_density_amf") and (value > 1.8):
-            return None
-        elif (name == "sulphurdioxide_so2_slant_column_number_density") and (value > 0.0015):
-            return None
-        elif (name == "sulphurdioxide_cloud_fraction") and (value > 0.3):
-            return None
-        elif (name == "sulphurdioxide_cloud_fraction") and (value > 0.3):
-            return None
-        elif (name == "sulphurdioxide_sensor_azimuth_angle") and (value > 80):
-            return None
-        elif (name == "sulphurdioxide_sensor_zenith_angle") and (value > 70):
-            return None
-        elif (name == "sulphurdioxide_solar_azimuth_angle") and (value > -22):
-            return None
-        elif (name == "sulphurdioxide_solar_zenith_angle") and (value > 47):
-            return None
-        elif (name == "sulphurdioxide_so2_column_number_density_15km") and (value > 0.0005):
-            return None
-        elif name == "pressure" and (value < 30 or value > 110):
-            return None
-        else:
-            pass
+        # if (name == "pm2_5" or name == "pm10") and (value < 1 or value > 1000):
+        #     return None
+        # elif name == "latitude" and (value < -90 or value > 90):
+        #     return None
+        # elif name == "longitude" and (value < -180 or value > 180):
+        #     return None
+        # elif name == "battery" and (value < 2.7 or value > 5):
+        #     return None
+        # elif name == "no2" and (value < 0 or value > 2049):
+        #     return None
+        # elif (name == "altitude" or name == "hdop") and value <= 0:
+        #     return None
+        # elif name == "satellites" and (value <= 0 or value > 50):
+        #     return None
+        # elif (name == "temperature") and (value <= 0 or value > 45):
+        #     return None
+        # elif (name == "humidity") and (value <= 0 or value > 99):
+        #     return None
+        # elif (name == "sulphurdioxide_so2_column_number_density") and (value > 0.01):
+        #     return None
+        # elif (name == "sulphurdioxide_so2_column_number_density_amf") and (value > 1.8):
+        #     return None
+        # elif (name == "sulphurdioxide_so2_slant_column_number_density") and (value > 0.0015):
+        #     return None
+        # elif (name == "sulphurdioxide_cloud_fraction") and (value > 0.3):
+        #     return None
+        # elif (name == "sulphurdioxide_cloud_fraction") and (value > 0.3):
+        #     return None
+        # elif (name == "sulphurdioxide_sensor_azimuth_angle") and (value > 80):
+        #     return None
+        # elif (name == "sulphurdioxide_sensor_zenith_angle") and (value > 70):
+        #     return None
+        # elif (name == "sulphurdioxide_solar_azimuth_angle") and (value > -22):
+        #     return None
+        # elif (name == "sulphurdioxide_solar_zenith_angle") and (value > 47):
+        #     return None
+        # elif (name == "sulphurdioxide_so2_column_number_density_15km") and (value > 0.0005):
+        #     return None
+        # elif name == "pressure" and (value < 30 or value > 110):
+        #     return None
+        # else:
+        #     pass
 
         return value
 
