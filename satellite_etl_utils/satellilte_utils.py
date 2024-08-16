@@ -4,7 +4,6 @@ class MlUtils_Satellilte:
 
 
         required_columns = {
-            # new cols
         'site_latitude','site_longitude','city','country','hour',
         'sulphurdioxide_so2_column_number_density','sulphurdioxide_so2_column_number_density_amf',
         'sulphurdioxide_so2_slant_column_number_density','sulphurdioxide_cloud_fraction',
@@ -29,12 +28,7 @@ class MlUtils_Satellilte:
         'ozone_solar_zenith_angle,cloud_cloud_fraction','cloud_cloud_top_pressure','cloud_cloud_top_height',
         'cloud_cloud_base_pressure','cloud_cloud_base_height','cloud_cloud_optical_depth','cloud_surface_albedo'
         ,'cloud_sensor_azimuth_angle','cloud_sensor_zenith_angle','cloud_solar_azimuth_angle','cloud_solar_zenith_angle',
-        'DayOfYear','DayOfWeek','Day','pm2_5'
-            ########
-            #old cols
-            # "device_id",
-            # "pm2_5",
-            # "timestamp",
+        'DayOfYear','DayOfWeek','Day','pm2_5','ID',"date"
         }
         if not required_columns.issubset(data.columns):
             missing_columns = required_columns.difference(data.columns)
@@ -42,15 +36,15 @@ class MlUtils_Satellilte:
                 f"Provided dataframe missing necessary columns: {', '.join(missing_columns)}"
             )
         try:
-            data["timestamp"] = pd.to_datetime(data["timestamp"])
+            data["date"] = pd.to_datetime(data["date"])
         except ValueError as e:
             raise ValueError(
                 "datetime conversion error, please provide timestamp in valid format"
             )
         group_columns = (
-            ["device_id"] + additional_columns
+            ["ID"] + additional_columns
             if job_type == "prediction"
-            else ["device_id"]
+            else ["ID"]
         )
         data["pm2_5"] = data.groupby(group_columns)["pm2_5"].transform(
             lambda x: x.interpolate(method="linear", limit_direction="both")
@@ -58,7 +52,7 @@ class MlUtils_Satellilte:
         if data_frequency == "daily":
             data = (
                 data.groupby(group_columns)
-                .resample("D", on="timestamp")
+                .resample("D", on="date")
                 .mean(numeric_only=True)
             )
             data.reset_index(inplace=True)
@@ -73,35 +67,35 @@ class MlUtils_Satellilte:
         """
         Perform the actual training for hourly data
         """
-        training_data.dropna(subset=["device_id"], inplace=True)
-        training_data["timestamp"] = pd.to_datetime(training_data["timestamp"])
+        training_data.dropna(subset=["ID"], inplace=True)
+        training_data["date"] = pd.to_datetime(training_data["date"])
         features = [
             c
             for c in training_data.columns
-            if c not in ["timestamp", "pm2_5", "latitude", "longitude", "device_id"]
+            if c not in ["date", "pm2_5", "latitude", "longitude","ID"]
         ]
         print(features)
 
         target_col = "pm2_5"
         train_data = validation_data = test_data = pd.DataFrame()
-        for device in training_data["device_id"].unique():
-            device_df = training_data[training_data["device_id"] == device]
-            months = device_df["timestamp"].dt.month.unique()
+        for device in training_data["ID"].unique():
+            device_df = training_data[training_data["ID"] == device]
+            months = device_df["date"].dt.month.unique()
             train_months = months[:8]
             val_months = months[8:9]
             test_months = months[9:]
 
-            train_df = device_df[device_df["timestamp"].dt.month.isin(train_months)]
-            val_df = device_df[device_df["timestamp"].dt.month.isin(val_months)]
-            test_df = device_df[device_df["timestamp"].dt.month.isin(test_months)]
+            train_df = device_df[device_df["date"].dt.month.isin(train_months)]
+            val_df = device_df[device_df["date"].dt.month.isin(val_months)]
+            test_df = device_df[device_df["date"].dt.month.isin(test_months)]
 
             train_data = pd.concat([train_data, train_df])
             validation_data = pd.concat([validation_data, val_df])
             test_data = pd.concat([test_data, test_df])
 
-        train_data.drop(columns=["timestamp", "device_id"], axis=1, inplace=True)
-        validation_data.drop(columns=["timestamp", "device_id"], axis=1, inplace=True)
-        test_data.drop(columns=["timestamp", "device_id"], axis=1, inplace=True)
+        train_data.drop(columns=["date", "ID"], axis=1, inplace=True)
+        validation_data.drop(columns=["date", "ID"], axis=1, inplace=True)
+        test_data.drop(columns=["date", "ID"], axis=1, inplace=True)
 
         train_target, validation_target, test_target = (
             train_data[target_col],
