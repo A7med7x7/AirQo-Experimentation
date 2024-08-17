@@ -61,6 +61,33 @@ class MlUtils:
             "device_id", # we will repalce device Id with ID
             "pm2_5",
             "timestamp",
+            # "device_id", #device id will replaced with id
+            # "timestamp", #timestamp will be replaced with date
+        'site_latitude','site_longitude','city','country','hour',
+        'sulphurdioxide_so2_column_number_density','sulphurdioxide_so2_column_number_density_amf',
+        'sulphurdioxide_so2_slant_column_number_density','sulphurdioxide_cloud_fraction',
+        'sulphurdioxide_sensor_azimuth_angle','sulphurdioxide_sensor_zenith_angle',
+        'sulphurdioxide_solar_azimuth_angle','sulphurdioxide_solar_zenith_angle',
+        'sulphurdioxide_so2_column_number_density_15km','month','carbonmonoxide_co_column_number_density',
+        'carbonmonoxide_h2o_column_number_density','carbonmonoxide_cloud_height','carbonmonoxide_sensor_altitude',
+        'carbonmonoxide_sensor_azimuth_angle','carbonmonoxide_sensor_zenith_angle','carbonmonoxide_solar_azimuth_angle',
+        'carbonmonoxide_solar_zenith_angle','nitrogendioxide_no2_column_number_density',
+        'nitrogendioxide_tropospheric_no2_column_number_density','nitrogendioxide_stratospheric_no2_column_number_density',
+        'nitrogendioxide_no2_slant_column_number_density','nitrogendioxide_tropopause_pressure',
+        'nitrogendioxide_absorbing_aerosol_index','nitrogendioxide_cloud_fraction','nitrogendioxide_sensor_altitude',
+        'nitrogendioxide_sensor_azimuth_angle','nitrogendioxide_sensor_zenith_angle','nitrogendioxide_solar_azimuth_angle'
+        ,'nitrogendioxide_solar_zenith_angle','formaldehyde_tropospheric_hcho_column_number_density',
+        'formaldehyde_tropospheric_hcho_column_number_density_amf','formaldehyde_hcho_slant_column_number_density',
+        'formaldehyde_cloud_fraction','formaldehyde_solar_zenith_angle','formaldehyde_solar_azimuth_angle',
+        'formaldehyde_sensor_zenith_angle','formaldehyde_sensor_azimuth_angle','uvaerosolindex_absorbing_aerosol_index',
+        'uvaerosolindex_sensor_altitude','uvaerosolindex_sensor_azimuth_angle','uvaerosolindex_sensor_zenith_angle'
+        ,'uvaerosolindex_solar_azimuth_angle','uvaerosolindex_solar_zenith_angle','ozone_o3_column_number_density',
+        'ozone_o3_column_number_density_amf','ozone_o3_slant_column_number_density','ozone_o3_effective_temperature',
+        'ozone_cloud_fraction','ozone_sensor_azimuth_angle','ozone_sensor_zenith_angle','ozone_solar_azimuth_angle',
+        'ozone_solar_zenith_angle,cloud_cloud_fraction','cloud_cloud_top_pressure','cloud_cloud_top_height',
+        'cloud_cloud_base_pressure','cloud_cloud_base_height','cloud_cloud_optical_depth','cloud_surface_albedo'
+        ,'cloud_sensor_azimuth_angle','cloud_sensor_zenith_angle','cloud_solar_azimuth_angle','cloud_solar_zenith_angle',
+        'DayOfYear','DayOfWeek','Day','pm2_5','ID','date'
         }
         if not required_columns.issubset(data.columns):
             missing_columns = required_columns.difference(data.columns)
@@ -69,6 +96,7 @@ class MlUtils:
             )
         try:
             data["timestamp"] = pd.to_datetime(data["timestamp"])
+            data["date"] = pd.to_datetime(data["date"])
         except ValueError as e:
             raise ValueError(
                 "datetime conversion error, please provide timestamp in valid format"
@@ -77,6 +105,9 @@ class MlUtils:
             ["device_id"] + additional_columns
             if job_type == "prediction"
             else ["device_id"]
+            ["ID"] + additional_columns
+            if job_type == "prediction"
+            else ["ID"]
         )
         data["pm2_5"] = data.groupby(group_columns)["pm2_5"].transform(
             lambda x: x.interpolate(method="linear", limit_direction="both")
@@ -85,6 +116,7 @@ class MlUtils:
             data = (
                 data.groupby(group_columns)
                 .resample("D", on="timestamp")
+                .resample("D", on="date")
                 .mean(numeric_only=True)
             )
             data.reset_index(inplace=True)
@@ -107,12 +139,19 @@ class MlUtils:
             raise ValueError("Required columns missing")
 
         df["timestamp"] = pd.to_datetime(df["timestamp"])
+            or "date" not in df.columns
+            or "ID" not in df.columns
+        ):
+            raise ValueError("Required columns missing")
+
+        df["date"] = pd.to_datetime(df["date"])
 
         df1 = df.copy()  # use copy to prevent terminal warning
         if freq == "daily":
             shifts = [1, 2, 3, 7]
             for s in shifts:
                 df1[f"pm2_5_last_{s}_day"] = df1.groupby(["device_id"])[
+                df1[f"pm2_5_last_{s}_day"] = df1.groupby(["ID"])[
                     target_col
                 ].shift(s)
             shifts = [2, 3, 7]
@@ -121,6 +160,7 @@ class MlUtils:
                 for f in functions:
                     df1[f"pm2_5_{f}_{s}_day"] = (
                         df1.groupby(["device_id"])[target_col]
+                        df1.groupby(["ID"])[target_col]
                         .shift(1)
                         .rolling(s)
                         .agg(f)
@@ -129,6 +169,7 @@ class MlUtils:
             shifts = [1, 2, 6, 12]
             for s in shifts:
                 df1[f"pm2_5_last_{s}_hour"] = df1.groupby(["device_id"])[
+                df1[f"pm2_5_last_{s}_hour"] = df1.groupby(["ID"])[
                     target_col
                 ].shift(s)
             shifts = [3, 6, 12, 24]
@@ -137,6 +178,7 @@ class MlUtils:
                 for f in functions:
                     df1[f"pm2_5_{f}_{s}_hour"] = (
                         df1.groupby(["device_id"])[target_col]
+                        df1.groupby(["ID"])[target_col]
                         .shift(1)
                         .rolling(s)
                         .agg(f)
@@ -158,6 +200,14 @@ class MlUtils:
         if freq not in ["daily", "hourly"]:
             raise ValueError("Invalid frequency")
         df["timestamp"] = pd.to_datetime(df["timestamp"])
+        if "date" not in df.columns:
+            raise ValueError("Required columns missing")
+
+        df["date"] = pd.to_datetime(df["date"])
+
+        if freq not in ["daily", "hourly"]:
+            raise ValueError("Invalid frequency")
+        df["date"] = pd.to_datetime(df["date"])
         df1 = df.copy()
         attributes = ["year", "month", "day", "dayofweek"]
         max_vals = [2023, 12, 30, 7]
@@ -170,6 +220,11 @@ class MlUtils:
             df1[a + "_cos"] = np.cos(2 * np.pi * df1[a] / m)
 
         df1["week"] = df1["timestamp"].dt.isocalendar().week
+            df1[a] = df1["date"].dt.__getattribute__(a)
+            df1[a + "_sin"] = np.sin(2 * np.pi * df1[a] / m)
+            df1[a + "_cos"] = np.cos(2 * np.pi * df1[a] / m)
+
+        df1["week"] = df1["date"].dt.isocalendar().week
         df1["week_sin"] = np.sin(2 * np.pi * df1["week"] / 52)
         df1["week_cos"] = np.cos(2 * np.pi * df1["week"] / 52)
         df1.drop(columns=attributes + ["week"], inplace=True)
@@ -185,6 +240,11 @@ class MlUtils:
                 raise ValueError(f"{column_name} column is missing")
 
         df["timestamp"] = pd.to_datetime(df["timestamp"])
+        for column_name in ["date", "latitude", "longitude"]:
+            if column_name not in df.columns:
+                raise ValueError(f"{column_name} column is missing")
+
+        df["date"] = pd.to_datetime(df["date"])
 
         df["x_cord"] = np.cos(df["latitude"]) * np.cos(df["longitude"])
         df["y_cord"] = np.cos(df["latitude"]) * np.sin(df["longitude"])
@@ -224,6 +284,12 @@ class MlUtils:
             c
             for c in training_data.columns
             if c not in ["timestamp", "pm2_5", "latitude", "longitude", "device_id"]
+        training_data.dropna(subset=["ID"], inplace=True)
+        training_data["date"] = pd.to_datetime(training_data["date"])
+        features = [
+            c
+            for c in training_data.columns
+            if c not in ["date", "pm2_5", "latitude", "longitude", "ID"]
         ]
         print(features)
 
@@ -232,6 +298,9 @@ class MlUtils:
         for device in training_data["device_id"].unique():
             device_df = training_data[training_data["device_id"] == device]
             months = device_df["timestamp"].dt.month.unique()
+        for device in training_data["ID"].unique():
+            device_df = training_data[training_data["ID"] == device]
+            months = device_df["date"].dt.month.unique()
             train_months = months[:8]
             val_months = months[8:9]
             test_months = months[9:]
@@ -239,6 +308,9 @@ class MlUtils:
             train_df = device_df[device_df["timestamp"].dt.month.isin(train_months)]
             val_df = device_df[device_df["timestamp"].dt.month.isin(val_months)]
             test_df = device_df[device_df["timestamp"].dt.month.isin(test_months)]
+            train_df = device_df[device_df["date"].dt.month.isin(train_months)]
+            val_df = device_df[device_df["date"].dt.month.isin(val_months)]
+            test_df = device_df[device_df["date"].dt.month.isin(test_months)]
 
             train_data = pd.concat([train_data, train_df])
             validation_data = pd.concat([validation_data, val_df])
@@ -247,6 +319,9 @@ class MlUtils:
         train_data.drop(columns=["timestamp", "device_id"], axis=1, inplace=True)
         validation_data.drop(columns=["timestamp", "device_id"], axis=1, inplace=True)
         test_data.drop(columns=["timestamp", "device_id"], axis=1, inplace=True)
+        train_data.drop(columns=["date", "ID"], axis=1, inplace=True)
+        validation_data.drop(columns=["date", "ID"], axis=1, inplace=True)
+        test_data.drop(columns=["date", "ID"], axis=1, inplace=True)
 
         train_target, validation_target, test_target = (
             train_data[target_col],
@@ -417,6 +492,10 @@ class MlUtils:
     def generate_forecasts(data, project_name, bucket_name, frequency):
         data = data.dropna(subset=["device_id"])
         data["timestamp"] = pd.to_datetime(data["timestamp"])
+    @staticmethod
+    def generate_forecasts(data, project_name, bucket_name, frequency):
+        data = data.dropna(subset=["ID"])
+        data["date"] = pd.to_datetime(data["date"])
         data.columns = data.columns.str.strip()
         # data["margin_of_error"] = data["adjusted_forecast"] = 0
 
@@ -435,6 +514,11 @@ class MlUtils:
                 # daily frequency
                 if frequency == "daily":
                     df_tmp.tail(1)["timestamp"] += timedelta(days=1)
+                    columns=["date", "ID", "site_id"], axis=1, inplace=False
+                )
+                # daily frequency
+                if frequency == "daily":
+                    df_tmp.tail(1)["date"] += timedelta(days=1)
                     shifts1 = [1, 2, 3, 7]
                     for s in shifts1:
                         df_tmp[f"pm2_5_last_{s}_day"] = df_tmp.shift(s, axis=0)["pm2_5"]
@@ -450,6 +534,8 @@ class MlUtils:
                 elif frequency == "hourly":
                     df_tmp.iloc[-1, df_tmp.columns.get_loc("timestamp")] = df_tmp.iloc[
                         -2, df_tmp.columns.get_loc("timestamp")
+                    df_tmp.iloc[-1, df_tmp.columns.get_loc("date")] = df_tmp.iloc[
+                        -2, df_tmp.columns.get_loc("date")
                     ] + pd.Timedelta(hours=1)
 
                     # lag features
@@ -478,6 +564,7 @@ class MlUtils:
                         2
                         * np.pi
                         * df_tmp.tail(1)["timestamp"].dt.__getattribute__(a)
+                        * df_tmp.tail(1)["date"].dt.__getattribute__(a)
                         / m
                     )
                     df_tmp.tail(1)[f"{a}_cos"] = np.cos(
@@ -498,6 +585,21 @@ class MlUtils:
                     "site_id",
                     "pm2_5",
                     "timestamp",
+                        * df_tmp.tail(1)["date"].dt.__getattribute__(a)
+                        / m
+                    )
+                df_tmp.tail(1)["week_sin"] = np.sin(
+                    2 * np.pi * df_tmp.tail(1)["date"].dt.isocalendar().week / 52
+                )
+                df_tmp.tail(1)["week_cos"] = np.cos(
+                    2 * np.pi * df_tmp.tail(1)["date"].dt.isocalendar().week / 52
+                )
+
+                excluded_columns = [
+                    "ID",
+                    "site_id",
+                    "pm2_5",
+                    "date",
                     "latitude",
                     "longitude",
                     # "margin_of_error",
@@ -521,6 +623,10 @@ class MlUtils:
                 #     + df_tmp.loc[df_tmp.index[-1], "margin_of_error"]
                 # )
 
+                df_tmp.loc[df_tmp.index[-1], "pm2_5"] = forecast_model.predict(
+                    df_tmp.drop(excluded_columns, axis=1).tail(1).values.reshape(1, -1)
+                )
+
             return df_tmp.iloc[-int(horizon) :, :]
 
         forecasts = pd.DataFrame()
@@ -534,6 +640,11 @@ class MlUtils:
         df_tmp = data.copy()
         for device in df_tmp["device_id"].unique():
             test_copy = df_tmp[df_tmp["device_id"] == device]
+
+
+        df_tmp = data.copy()
+        for device in df_tmp["ID"].unique():
+            test_copy = df_tmp[df_tmp["ID"] == device]
             horizon = (
                 configuration.HOURLY_FORECAST_HORIZON
                 if frequency == "hourly"
@@ -556,6 +667,9 @@ class MlUtils:
                 "device_id",
                 "site_id",
                 "timestamp",
+                "ID",
+                "site_id",
+                "date",
                 "pm2_5",
                 # "margin_of_error",
                 # "adjusted_forecast",
@@ -565,6 +679,7 @@ class MlUtils:
     @staticmethod
     def save_forecasts_to_mongo(data, frequency):
         device_ids = data["device_id"].unique()
+        device_ids = data["ID"].unique()
         created_at = pd.to_datetime(datetime.now()).isoformat()
 
         forecast_results = []
@@ -575,6 +690,11 @@ class MlUtils:
                 "site_id": data[data["device_id"] == i]["site_id"].unique()[0],
                 "pm2_5": data[data["device_id"] == i]["pm2_5"].tolist(),
                 "timestamp": data[data["device_id"] == i]["timestamp"].tolist(),
+                "ID": i,
+                "created_at": created_at,
+                "site_id": data[data["device_id"] == i]["site_id"].unique()[0],
+                "pm2_5": data[data["device_id"] == i]["pm2_5"].tolist(),
+                "date": data[data["device_id"] == i]["timestamp"].tolist(),
             }
             forecast_results.append(doc)
 
@@ -589,12 +709,14 @@ class MlUtils:
             try:
                 filter_query = {
                     "device_id": doc["device_id"],
+                    "ID": doc["ID"],
                     "site_id": doc["site_id"],
                 }
                 update_query = {
                     "$set": {
                         "pm2_5": doc["pm2_5"],
                         "timestamp": doc["timestamp"],
+                        "date": doc["date"],
                         "created_at": doc["created_at"],
                     }
                 }
@@ -602,6 +724,7 @@ class MlUtils:
             except Exception as e:
                 print(
                     f"Failed to update forecast for device {doc['device_id']}: {str(e)}"
+                    f"Failed to update forecast for device {doc['ID']}: {str(e)}"
                 )
 
     ###Fault Detection
@@ -620,6 +743,7 @@ class MlUtils:
             raise ValueError("Input must be a dataframe")
 
         required_columns = ["device_id", "s1_pm2_5", "s2_pm2_5"]
+        required_columns = ["ID", "s1_pm2_5", "s2_pm2_5"]
         if not set(required_columns).issubset(set(df.columns.to_list())):
             raise ValueError(
                 f"Input must have the following columns: {required_columns}"
@@ -628,6 +752,7 @@ class MlUtils:
         result = pd.DataFrame(
             columns=[
                 "device_id",
+                "ID",
                 "correlation_fault",
                 "correlation_value",
                 "missing_data_fault",
@@ -635,6 +760,8 @@ class MlUtils:
         )
         for device in df["device_id"].unique():
             device_df = df[df["device_id"] == device]
+        for device in df["ID"].unique():
+            device_df = df[df["ID"] == device]
             corr = device_df["s1_pm2_5"].corr(device_df["s2_pm2_5"])
             correlation_fault = 1 if corr < 0.9 else 0
             missing_data_fault = 0
@@ -647,6 +774,7 @@ class MlUtils:
             temp = pd.DataFrame(
                 {
                     "device_id": [device],
+                    "ID": [device],
                     "correlation_fault": [correlation_fault],
                     "correlation_value": [corr],
                     "missing_data_fault": [missing_data_fault],
@@ -669,6 +797,8 @@ class MlUtils:
 
         df["timestamp"] = pd.to_datetime(df["timestamp"])
         columns_to_ignore = ["device_id", "timestamp"]
+        df["date"] = pd.to_datetime(df["date"])
+        columns_to_ignore = ["ID", "date"]
         df.dropna(inplace=True)
 
         isolation_forest = IsolationForest(contamination=0.37)
@@ -688,6 +818,8 @@ class MlUtils:
             (
                 df[df["anomaly_value"] == -1].groupby("device_id").size()
                 / df.groupby("device_id").size()
+                df[df["anomaly_value"] == -1].groupby("ID").size()
+                / df.groupby("ID").size()
             )
             * 100,
             columns=["anomaly_percentage"],
@@ -706,11 +838,17 @@ class MlUtils:
         df["anomaly_sequence_length"].fillna(0, inplace=True)
         device_max_anomaly_sequence = (
             df.groupby("device_id")["anomaly_sequence_length"].max().reset_index()
+            df[df["anomaly_value"] == -1].groupby(["ID", "group"]).cumcount() + 1
+        )
+        df["anomaly_sequence_length"].fillna(0, inplace=True)
+        device_max_anomaly_sequence = (
+            df.groupby("ID")["anomaly_sequence_length"].max().reset_index()
         )
         faulty_devices_df = device_max_anomaly_sequence[
             device_max_anomaly_sequence["anomaly_sequence_length"] >= 80
         ]
         faulty_devices_df.columns = ["device_id", "fault_count"]
+        faulty_devices_df.columns = ["ID", "fault_count"]
 
         return faulty_devices_df
 
@@ -721,6 +859,7 @@ class MlUtils:
         merged_df = dataframes[0]
         for df in dataframes[1:]:
             merged_df = merged_df.merge(df, on="device_id", how="outer")
+            merged_df = merged_df.merge(df, on="ID", how="outer")
         merged_df = merged_df.fillna(0)
         merged_df["created_at"] = datetime.now().isoformat(timespec="seconds")
         with pm.MongoClient(configuration.MONGO_URI) as client:
@@ -729,6 +868,7 @@ class MlUtils:
             bulk_ops = [
                 pm.UpdateOne(
                     {"device_id": record["device_id"]},
+                    {"ID": record["ID"]},
                     {"$set": record},
                     upsert=True,
                 )

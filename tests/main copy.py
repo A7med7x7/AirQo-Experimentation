@@ -23,4 +23,4 @@ def filter_missing_values(train_data: pd.DataFrame, threshold=0.15) -> pd.DataFr
 
 
 
-    
+            return str(e)
