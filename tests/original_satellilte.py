@@ -5,10 +5,11 @@ from sklearn.metrics import mean_squared_error,mean_absolute_error
 from sklearn.model_selection import GroupKFold,KFold
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
-from satellite_etl_utils.data_validator import remove_outliers
+from satellite_etl_utils.data_validator import DataValidationUtils
 
-class Processes:
-    def remove_outliers_values(df: pd.DataFrame) -> pd.DataFrame:
+class ml_Processes:
+    @staticmethod
+    def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
         if df.empty:
             raise ValueError('the dataframe is empty')
         dataframe = DataValidationUtils.remove_outliers(df)
@@ -26,10 +27,18 @@ class Processes:
             return filtered_train
         except Exception as e:
             return str(e)
-
+    @staticmethod
     def process_date_columns(df: pd.DataFrame)-> pd.DataFrame:
-        if "date" not in df.columns:
-                    raise ValueError("Required columns missing")
+        required_columns = {
+            "date",
+            "timestamp",
+        }
+        if not required_columns.issubset(df.columns):
+            missing_columns = required_columns.difference(data.columns)
+            raise ValueError(
+                f"Provided dataframe missing necessary columns: {', '.join(missing_columns)}"
+            )
+
         df['date'] = pd.to_datetime(df['date'])
         df['date_month'] = df['date'].dt.day_of_year
         df['DayOfWeek'] = df['date'].dt.dayofweek

@@ -1,3 +1,5 @@
+#this class must include any forecast function including the forecast of hourly forecasta
+#and daily forecast 
 class MlUtils_Satellilte:
     @staticmethod
     def preprocess_data(data, data_frequency, job_type):
