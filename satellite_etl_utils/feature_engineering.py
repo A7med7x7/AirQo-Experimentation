@@ -1,16 +1,20 @@
 from sklearn.preprocessing import LabelEncoder
 import pandas as pd
+
 class FeatureEngineering:
     @staticmethod
-    def label_encoding(data):
+    def label_encoding(data:pd.DataFrame)->pd.DataFrame:
+        if not 'city' in data.columns or not 'country' in data.columns:
+            raise ValueError('data frame does not contain city or country column')
         le = LabelEncoder()
+
         for column in ['city','country']:
             data[column] = le.fit_transform(data)
         return data
     
     @staticmethod
     def time_features(data:pd.DataFrame):
-        data['date'] = pd.to_datetime(data['date'])
+        data['date'] = pd.to_datetime(data['date'])            
         data['date_month'] = data['date'].dt.day_of_year
         data['DayOfWeek'] =  data['date'].dt.dayofweek
         data['Day'] =  data['date'].dt.day
