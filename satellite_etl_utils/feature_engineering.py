@@ -3,22 +3,36 @@ import pandas as pd
 
 class FeatureEngineering:
     @staticmethod
-    def label_encoding(data:pd.DataFrame)->pd.DataFrame:
-        """applies label encoding for the city and country features 
-        
+    def encoding(data: pd.DataFrame, encoder: str = 'LabelEncoder') -> pd.DataFrame:
+        """
+        applies encoding for the city and country features 
+
         Keyword arguments:
         data --  the data frame to apply the transformation on
-        Return: returns a dataframe after applying the label encoding
+        encoder --  the type of encoding to apply (default: 'LabelEncoder')
+        Return: returns a dataframe after applying the encoding
         """
         
         if not 'city' in data.columns or not 'country' in data.columns:
             raise ValueError('data frame does not contain city or country column')
-        le = LabelEncoder()
+        
+        if encoder == 'LabelEncoder':
+            le = LabelEncoder()
+            for column in ['city', 'country']:
+                data[column] = le.fit_transform(data[column])
+        elif encoder == 'OneHotEncoder':
+            ohe = OneHotEncoder(sparse=False)
+            for column in ['city', 'country']:
+                encoded_data = ohe.fit_transform(data[[column]])
+                encoded_columns = [f"{column}_{i}" for i in range(encoded_data.shape[1])]
+                encoded_df = pd.DataFrame(encoded_data, columns=encoded_columns)
+                data = pd.concat([data, encoded_df], axis=1)
+                data = data.drop(column, axis=1)
+        else:
+            raise ValueError("Invalid encoder. Please choose 'LabelEncoder' or 'OneHotEncoder'.")
 
-        for column in ['city','country']:
-            data[column] = le.fit_transform(data)
         return data
-    
+
     @staticmethod
     def time_features(data:pd.DataFrame):
         """extracting time feature from the data frame (like day of year day of week ..etc)

@@ -13,14 +13,14 @@ from satellite_etl_utils.feature_engineering import FeatureEngineering
 )
 def processing_pipeline():
     @task()
-    def formatting_variables(data):
-        return DataValidationUtils.format_data_types(data)
+    def formatting_variables(data,str_format="%Y-%m-%d"):
+        return DataValidationUtils.format_data_types(data,timestamps='date')
     @task()
     def validating_data(data):
         return DataValidationUtils.get_valid_values(data)   
     @task()
     def label_encoding(data):
-        return feature_engineering.LabelEncoder(data)
+        return feature_engineering.encoding(data,'LabelEncoder')
     @task()
     def time_related_features(data):
         return FeatureEngineering.time_features(data)
@@ -28,3 +28,10 @@ def processing_pipeline():
     def lag_features_extraction(data,frequency):
         return FeatureEngineering.lag_features(data,frequency='hourly')
     
+    data = formatting_variables(data)
+    data = validating_data(data)
+    data = label_encoding(data)
+    data = formatting_variables(data)
+    data = lag_features_extraction(data)
+    
+processing_pipeline()
