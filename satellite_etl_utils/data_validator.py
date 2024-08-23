@@ -34,8 +34,8 @@ class DataValidationUtils:
 
     @staticmethod
     def get_valid_value(value, name, data: pd.DataFrame):
-        upper_limit = data[name].max() + data[name].median() / 2
-        lower_limit = data[name].min() - data[name].median() / 2
+        upper_limit = data[name].max() + abs(data[name].median()) / 2
+        lower_limit = data[name].min() - abs(data[name].median()) / 2
         if value > upper_limit or value < lower_limit:
             return None
         return value
