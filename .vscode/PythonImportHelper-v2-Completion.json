@@ -1,0 +1,569 @@
+[
+    {
+        "label": "dag",
+        "importPath": "airflow.decorators",
+        "description": "airflow.decorators",
+        "isExtraImport": true,
+        "detail": "airflow.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "task",
+        "importPath": "airflow.decorators",
+        "description": "airflow.decorators",
+        "isExtraImport": true,
+        "detail": "airflow.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "dag",
+        "importPath": "airflow.decorators",
+        "description": "airflow.decorators",
+        "isExtraImport": true,
+        "detail": "airflow.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "task",
+        "importPath": "airflow.decorators",
+        "description": "airflow.decorators",
+        "isExtraImport": true,
+        "detail": "airflow.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "feature_engineering",
+        "importPath": "satellite_etl_utils",
+        "description": "satellite_etl_utils",
+        "isExtraImport": true,
+        "detail": "satellite_etl_utils",
+        "documentation": {}
+    },
+    {
+        "label": "DataValidationUtils",
+        "importPath": "satellite_etl_utils",
+        "description": "satellite_etl_utils",
+        "isExtraImport": true,
+        "detail": "satellite_etl_utils",
+        "documentation": {}
+    },
+    {
+        "label": "configuration",
+        "importPath": "airqo_etl_utils.config",
+        "description": "airqo_etl_utils.config",
+        "isExtraImport": true,
+        "detail": "airqo_etl_utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "DataValidationUtils",
+        "importPath": "satellite_etl_utils.data_validator",
+        "description": "satellite_etl_utils.data_validator",
+        "isExtraImport": true,
+        "detail": "satellite_etl_utils.data_validator",
+        "documentation": {}
+    },
+    {
+        "label": "DataValidationUtils",
+        "importPath": "satellite_etl_utils.data_validator",
+        "description": "satellite_etl_utils.data_validator",
+        "isExtraImport": true,
+        "detail": "satellite_etl_utils.data_validator",
+        "documentation": {}
+    },
+    {
+        "label": "FeatureEngineering",
+        "importPath": "satellite_etl_utils.feature_engineering",
+        "description": "satellite_etl_utils.feature_engineering",
+        "isExtraImport": true,
+        "detail": "satellite_etl_utils.feature_engineering",
+        "documentation": {}
+    },
+    {
+        "label": "traceback",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "LabelEncoder",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "LabelEncoder",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "LabelEncoder",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "gcsfs",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "gcsfs",
+        "description": "gcsfs",
+        "detail": "gcsfs",
+        "documentation": {}
+    },
+    {
+        "label": "joblib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "joblib",
+        "description": "joblib",
+        "detail": "joblib",
+        "documentation": {}
+    },
+    {
+        "label": "mlflow",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mlflow",
+        "description": "mlflow",
+        "detail": "mlflow",
+        "documentation": {}
+    },
+    {
+        "label": "optuna",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "optuna",
+        "description": "optuna",
+        "detail": "optuna",
+        "documentation": {}
+    },
+    {
+        "label": "pymongo",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "lightgbm",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "lightgbm",
+        "description": "lightgbm",
+        "detail": "lightgbm",
+        "documentation": {}
+    },
+    {
+        "label": "LGBMRegressor",
+        "importPath": "lightgbm",
+        "description": "lightgbm",
+        "isExtraImport": true,
+        "detail": "lightgbm",
+        "documentation": {}
+    },
+    {
+        "label": "early_stopping",
+        "importPath": "lightgbm",
+        "description": "lightgbm",
+        "isExtraImport": true,
+        "detail": "lightgbm",
+        "documentation": {}
+    },
+    {
+        "label": "LGBMRegressor",
+        "importPath": "lightgbm",
+        "description": "lightgbm",
+        "isExtraImport": true,
+        "detail": "lightgbm",
+        "documentation": {}
+    },
+    {
+        "label": "LGBMRegressor",
+        "importPath": "lightgbm",
+        "description": "lightgbm",
+        "isExtraImport": true,
+        "detail": "lightgbm",
+        "documentation": {}
+    },
+    {
+        "label": "mean_squared_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "mean_squared_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "mean_absolute_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "mean_squared_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "mean_absolute_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "GroupKFold",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "KFold",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "GroupKFold",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "KFold",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "LinearRegression",
+        "importPath": "sklearn.linear_model",
+        "description": "sklearn.linear_model",
+        "isExtraImport": true,
+        "detail": "sklearn.linear_model",
+        "documentation": {}
+    },
+    {
+        "label": "LinearRegression",
+        "importPath": "sklearn.linear_model",
+        "description": "sklearn.linear_model",
+        "isExtraImport": true,
+        "detail": "sklearn.linear_model",
+        "documentation": {}
+    },
+    {
+        "label": "date_to_str",
+        "importPath": "satellite_etl_utils.date",
+        "description": "satellite_etl_utils.date",
+        "isExtraImport": true,
+        "detail": "satellite_etl_utils.date",
+        "documentation": {}
+    },
+    {
+        "label": "tests.original_satellilte",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tests.original_satellilte",
+        "description": "tests.original_satellilte",
+        "detail": "tests.original_satellilte",
+        "documentation": {}
+    },
+    {
+        "label": "ml_Process",
+        "importPath": "tests.original_satellilte",
+        "description": "tests.original_satellilte",
+        "isExtraImport": true,
+        "detail": "tests.original_satellilte",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "pickle",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pickle",
+        "description": "pickle",
+        "detail": "pickle",
+        "documentation": {}
+    },
+    {
+        "label": "processing_pipeline",
+        "kind": 2,
+        "importPath": "dags.pipeline",
+        "description": "dags.pipeline",
+        "peekOfCode": "def processing_pipeline():\n    @task()\n    def formatting_variables(data,str_format=\"%Y-%m-%d\"):\n        return DataValidationUtils.format_data_types(data,timestamps='date')\n    @task()\n    def validating_data(data):\n        return DataValidationUtils.get_valid_values(data)   \n    @task()\n    def label_encoding(data):\n        return feature_engineering.encoding(data,'LabelEncoder')",
+        "detail": "dags.pipeline",
+        "documentation": {}
+    },
+    {
+        "label": "DataValidationUtils",
+        "kind": 6,
+        "importPath": "satellite_etl_utils.data_validator",
+        "description": "satellite_etl_utils.data_validator",
+        "peekOfCode": "class DataValidationUtils:\n    @staticmethod\n    def format_data_types(\n        data: pd.DataFrame,\n        floats: list = None,\n        integers: list = None,\n        timestamps: list = None,\n    ) -> pd.DataFrame:\n        floats = [] if floats is None else floats\n        integers = [] if integers is None else integers",
+        "detail": "satellite_etl_utils.data_validator",
+        "documentation": {}
+    },
+    {
+        "label": "FeatureEngineering",
+        "kind": 6,
+        "importPath": "satellite_etl_utils.feature_engineering",
+        "description": "satellite_etl_utils.feature_engineering",
+        "peekOfCode": "class FeatureEngineering:\n    @staticmethod\n    def encoding(data: pd.DataFrame, encoder: str = 'LabelEncoder') -> pd.DataFrame:\n        \"\"\"\n        applies encoding for the city and country features \n        Keyword arguments:\n        data --  the data frame to apply the transformation on\n        encoder --  the type of encoding to apply (default: 'LabelEncoder')\n        Return: returns a dataframe after applying the encoding\n        \"\"\"",
+        "detail": "satellite_etl_utils.feature_engineering",
+        "documentation": {}
+    },
+    {
+        "label": "GCSUtils",
+        "kind": 6,
+        "importPath": "satellite_etl_utils.ml_utils",
+        "description": "satellite_etl_utils.ml_utils",
+        "peekOfCode": "class GCSUtils:\n    \"\"\"Utility class for saving and retrieving models from GCS\"\"\"\n    # TODO: In future, save and retrieve models from mlflow instead of GCS\n    @staticmethod\n    def get_trained_model_from_gcs(project_name, bucket_name, source_blob_name):\n        fs = gcsfs.GCSFileSystem(project=project_name)\n        fs.ls(bucket_name)\n        with fs.open(bucket_name + \"/\" + source_blob_name, \"rb\") as handle:\n            job = joblib.load(handle)\n        return job",
+        "detail": "satellite_etl_utils.ml_utils",
+        "documentation": {}
+    },
+    {
+        "label": "MlUtils",
+        "kind": 6,
+        "importPath": "satellite_etl_utils.ml_utils",
+        "description": "satellite_etl_utils.ml_utils",
+        "peekOfCode": "class MlUtils:\n    \"\"\"Utility class for ML related tasks\"\"\"\n    @staticmethod\n    def preprocess_data(data, data_frequency, job_type):\n        required_columns = {\n            # \"device_id\", #device id will replaced with id\n            # \"timestamp\", #timestamp will be replaced with date\n        'site_latitude','site_longitude','city','country','hour',\n        'nitrogendioxide_no2_column_number_density',\n        'nitrogendioxide_tropospheric_no2_column_number_density','nitrogendioxide_stratospheric_no2_column_number_density',",
+        "detail": "satellite_etl_utils.ml_utils",
+        "documentation": {}
+    },
+    {
+        "label": "project_id",
+        "kind": 5,
+        "importPath": "satellite_etl_utils.ml_utils",
+        "description": "satellite_etl_utils.ml_utils",
+        "peekOfCode": "project_id = configuration.GOOGLE_CLOUD_PROJECT_ID\nbucket = configuration.FORECAST_MODELS_BUCKET\nenvironment = configuration.ENVIRONMENT\nadditional_columns = [\"site_id\"]\npd.options.mode.chained_assignment = None\n### This module contains utility functions for ML jobs.\nclass GCSUtils:\n    \"\"\"Utility class for saving and retrieving models from GCS\"\"\"\n    # TODO: In future, save and retrieve models from mlflow instead of GCS\n    @staticmethod",
+        "detail": "satellite_etl_utils.ml_utils",
+        "documentation": {}
+    },
+    {
+        "label": "bucket",
+        "kind": 5,
+        "importPath": "satellite_etl_utils.ml_utils",
+        "description": "satellite_etl_utils.ml_utils",
+        "peekOfCode": "bucket = configuration.FORECAST_MODELS_BUCKET\nenvironment = configuration.ENVIRONMENT\nadditional_columns = [\"site_id\"]\npd.options.mode.chained_assignment = None\n### This module contains utility functions for ML jobs.\nclass GCSUtils:\n    \"\"\"Utility class for saving and retrieving models from GCS\"\"\"\n    # TODO: In future, save and retrieve models from mlflow instead of GCS\n    @staticmethod\n    def get_trained_model_from_gcs(project_name, bucket_name, source_blob_name):",
+        "detail": "satellite_etl_utils.ml_utils",
+        "documentation": {}
+    },
+    {
+        "label": "environment",
+        "kind": 5,
+        "importPath": "satellite_etl_utils.ml_utils",
+        "description": "satellite_etl_utils.ml_utils",
+        "peekOfCode": "environment = configuration.ENVIRONMENT\nadditional_columns = [\"site_id\"]\npd.options.mode.chained_assignment = None\n### This module contains utility functions for ML jobs.\nclass GCSUtils:\n    \"\"\"Utility class for saving and retrieving models from GCS\"\"\"\n    # TODO: In future, save and retrieve models from mlflow instead of GCS\n    @staticmethod\n    def get_trained_model_from_gcs(project_name, bucket_name, source_blob_name):\n        fs = gcsfs.GCSFileSystem(project=project_name)",
+        "detail": "satellite_etl_utils.ml_utils",
+        "documentation": {}
+    },
+    {
+        "label": "additional_columns",
+        "kind": 5,
+        "importPath": "satellite_etl_utils.ml_utils",
+        "description": "satellite_etl_utils.ml_utils",
+        "peekOfCode": "additional_columns = [\"site_id\"]\npd.options.mode.chained_assignment = None\n### This module contains utility functions for ML jobs.\nclass GCSUtils:\n    \"\"\"Utility class for saving and retrieving models from GCS\"\"\"\n    # TODO: In future, save and retrieve models from mlflow instead of GCS\n    @staticmethod\n    def get_trained_model_from_gcs(project_name, bucket_name, source_blob_name):\n        fs = gcsfs.GCSFileSystem(project=project_name)\n        fs.ls(bucket_name)",
+        "detail": "satellite_etl_utils.ml_utils",
+        "documentation": {}
+    },
+    {
+        "label": "pd.options.mode.chained_assignment",
+        "kind": 5,
+        "importPath": "satellite_etl_utils.ml_utils",
+        "description": "satellite_etl_utils.ml_utils",
+        "peekOfCode": "pd.options.mode.chained_assignment = None\n### This module contains utility functions for ML jobs.\nclass GCSUtils:\n    \"\"\"Utility class for saving and retrieving models from GCS\"\"\"\n    # TODO: In future, save and retrieve models from mlflow instead of GCS\n    @staticmethod\n    def get_trained_model_from_gcs(project_name, bucket_name, source_blob_name):\n        fs = gcsfs.GCSFileSystem(project=project_name)\n        fs.ls(bucket_name)\n        with fs.open(bucket_name + \"/\" + source_blob_name, \"rb\") as handle:",
+        "detail": "satellite_etl_utils.ml_utils",
+        "documentation": {}
+    },
+    {
+        "label": "MlUtils_Satellilte",
+        "kind": 6,
+        "importPath": "satellite_etl_utils.satellilte_utils",
+        "description": "satellite_etl_utils.satellilte_utils",
+        "peekOfCode": "class MlUtils_Satellilte:\n    @staticmethod\n    def preprocess_data(data, data_frequency, job_type):\n        required_columns = {\n        'site_latitude','site_longitude','city','country','hour',\n        'sulphurdioxide_so2_column_number_density','sulphurdioxide_so2_column_number_density_amf',\n        'sulphurdioxide_so2_slant_column_number_density','sulphurdioxide_cloud_fraction',\n        'sulphurdioxide_sensor_azimuth_angle','sulphurdioxide_sensor_zenith_angle',\n        'sulphurdioxide_solar_azimuth_angle','sulphurdioxide_solar_zenith_angle',\n        'sulphurdioxide_so2_column_number_density_15km','month','carbonmonoxide_co_column_number_density',",
+        "detail": "satellite_etl_utils.satellilte_utils",
+        "documentation": {}
+    },
+    {
+        "label": "DataValidationUtils",
+        "kind": 6,
+        "importPath": "satellite_etl_utils.satellite_process",
+        "description": "satellite_etl_utils.satellite_process",
+        "peekOfCode": "class DataValidationUtils:\n    @staticmethod\n    def format_data_types(\n        data: pd.DataFrame,\n        floats: list = None,\n        integers: list = None,\n        timestamps: list = None,\n    ) -> pd.DataFrame:\n        floats = [] if floats is None else floats\n        integers = [] if integers is None else integers",
+        "detail": "satellite_etl_utils.satellite_process",
+        "documentation": {}
+    },
+    {
+        "label": "filter_missing_values",
+        "kind": 2,
+        "importPath": "tests.main copy",
+        "description": "tests.main copy",
+        "peekOfCode": "def filter_missing_values(train_data: pd.DataFrame, threshold=0.15) -> pd.DataFrame:\n    assert isinstance(threshold, (int, float))\n    try:\n        if not isinstance(train_data, pd.DataFrame):\n            raise ValueError(\"Input should be a pandas DataFrame\")\n        valid_columns = train_data.notna().sum()[train_data.notna().sum() > threshold * len(train_data)].index\n        filtered_train = train_data[valid_columns]\n        return filtered_train\n    except Exception as e:\n        return str(e)",
+        "detail": "tests.main copy",
+        "documentation": {}
+    },
+    {
+        "label": "ml_Processes",
+        "kind": 6,
+        "importPath": "tests.original_satellilte",
+        "description": "tests.original_satellilte",
+        "peekOfCode": "class ml_Processes:\n    @staticmethod\n    def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:\n        if df.empty:\n            raise ValueError('the dataframe is empty')\n        dataframe = DataValidationUtils.remove_outliers(df)\n        return df\n    def drop_columns(df: pd.DataFrame, threshold=0.15) -> pd.DataFrame:\n        assert isinstance(threshold, (int, float))\n        try:",
+        "detail": "tests.original_satellilte",
+        "documentation": {}
+    },
+    {
+        "label": "train_forecasting_models",
+        "kind": 2,
+        "importPath": "tests.satellilte_training_job",
+        "description": "tests.satellilte_training_job",
+        "peekOfCode": "def train_forecasting_models():\n    # Tasks for training hourly forecast job\n    @task()\n    def fetch_training_data_for_hourly_forecast_model():\n        current_date = datetime.today()\n        start_date = current_date - relativedelta(\n            months=int(configuration.HOURLY_FORECAST_TRAINING_JOB_SCOPE)\n        )\n        start_date = date_to_str(start_date, str_format=\"%Y-%m-%d\")\n        return BigQueryApi().fetch_data(start_date, \"train\")",
+        "detail": "tests.satellilte_training_job",
+        "documentation": {}
+    },
+    {
+        "label": "welcome",
+        "kind": 2,
+        "importPath": "flask_api",
+        "description": "flask_api",
+        "peekOfCode": "def welcome():\n    return('welcome to the home directory')\n@app.route('/predict',method=['POST'])\ndef prediction_note():\n    df_test = pd.read_csv(request.files.get('file'))\n    prediction = regressor.predicted\n    return f'The predicted value is: {prediction[0]}'\nif __name__ == '__main__':\n    app.run()",
+        "detail": "flask_api",
+        "documentation": {}
+    },
+    {
+        "label": "prediction_note",
+        "kind": 2,
+        "importPath": "flask_api",
+        "description": "flask_api",
+        "peekOfCode": "def prediction_note():\n    df_test = pd.read_csv(request.files.get('file'))\n    prediction = regressor.predicted\n    return f'The predicted value is: {prediction[0]}'\nif __name__ == '__main__':\n    app.run()",
+        "detail": "flask_api",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "flask_api",
+        "description": "flask_api",
+        "peekOfCode": "app = Flask(__name__)\npickle_in = open('/Users/ahmed/Downloads/computerscience/AirQo/PM2.5-Prediction/model/pm2_5.pkl','rb')\nregressor = pickle.load(pickle_in)\n@app.route('/the-server')\ndef welcome():\n    return('welcome to the home directory')\n@app.route('/predict',method=['POST'])\ndef prediction_note():\n    df_test = pd.read_csv(request.files.get('file'))\n    prediction = regressor.predicted",
+        "detail": "flask_api",
+        "documentation": {}
+    },
+    {
+        "label": "pickle_in",
+        "kind": 5,
+        "importPath": "flask_api",
+        "description": "flask_api",
+        "peekOfCode": "pickle_in = open('/Users/ahmed/Downloads/computerscience/AirQo/PM2.5-Prediction/model/pm2_5.pkl','rb')\nregressor = pickle.load(pickle_in)\n@app.route('/the-server')\ndef welcome():\n    return('welcome to the home directory')\n@app.route('/predict',method=['POST'])\ndef prediction_note():\n    df_test = pd.read_csv(request.files.get('file'))\n    prediction = regressor.predicted\n    return f'The predicted value is: {prediction[0]}'",
+        "detail": "flask_api",
+        "documentation": {}
+    },
+    {
+        "label": "regressor",
+        "kind": 5,
+        "importPath": "flask_api",
+        "description": "flask_api",
+        "peekOfCode": "regressor = pickle.load(pickle_in)\n@app.route('/the-server')\ndef welcome():\n    return('welcome to the home directory')\n@app.route('/predict',method=['POST'])\ndef prediction_note():\n    df_test = pd.read_csv(request.files.get('file'))\n    prediction = regressor.predicted\n    return f'The predicted value is: {prediction[0]}'\nif __name__ == '__main__':",
+        "detail": "flask_api",
+        "documentation": {}
+    }
+]
