@@ -5,7 +5,6 @@ import pandas as pd
 class DataValidationUtils:
     
     
-    
     @staticmethod
     def format_data_types(
         data: pd.DataFrame,
